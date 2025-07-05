@@ -1,0 +1,65 @@
+🚀 1. Renderer encounters component
+Vue, bir bileşeni DOM'a yerleştirmeye başladığında bu süreç tetiklenir.
+
+⚙️ 2. setup() (Composition API)
+Eğer Composition API kullanılıyorsa setup() fonksiyonu bu aşamada çalışır. React’teki useEffect, useState gibi kavramlara benzer.
+
+🧱 3. Init Options API
+Options API kullanılıyorsa (data, methods, computed gibi) bu aşamada başlatılır.
+
+🔴 4. beforeCreate (Lifecycle Hook)
+Komponentin veri (data) ve olayları (methods) henüz tanımlı değildir.
+
+Daha çok bağımlılıkları başlatmak için kullanılır.
+
+🔴 5. created
+data, methods, computed gibi seçenekler artık erişilebilir hale gelmiştir.
+
+Ancak DOM'a henüz hiçbir şey yerleştirilmemiştir.
+
+🧩 6. Has pre-compiled template?
+Vue, bu bileşenin önceden derlenmiş bir şablon (template) içerip içermediğini kontrol eder.
+
+Eğer yoksa: Compile template on-the-fly aşamasında template derlenir.
+
+🔴 7. beforeMount
+DOM’a yerleştirme henüz yapılmadı ama yapılmak üzere.
+
+İlk render öncesi son hazırlıklar için kullanılır.
+
+🖼️ 8. initial render
+Vue, bileşenin template’ini render eder ve DOM’a yerleştirir.
+
+🔴 9. mounted
+Komponent DOM’a başarıyla yerleştirildi.
+
+DOM’a erişim bu noktada mümkün. Genelde üçüncü parti kütüphaneler burada başlatılır.
+
+♻️ 10. Reactive Updates (when data changes)
+Veri (data) değiştiğinde:
+
+beforeUpdate → yeniden render edilmeden hemen önce çalışır.
+
+re-render and patch → DOM güncellenir.
+
+updated → DOM güncellendikten sonra tetiklenir.
+
+🧹 11. beforeUnmount
+Komponent DOM’dan kaldırılmadan hemen önce çalışır.
+
+Temizlik işlemleri (ör. event listener kaldırma) burada yapılır.
+
+🔴 12. unmounted
+Komponent DOM’dan tamamen kaldırıldığında tetiklenir.
+
+🔁 Kısaca Vue Lifecycle Hook'ları
+| Hook            | Açıklama                               |
+| --------------- | -------------------------------------- |
+| `beforeCreate`  | Veri henüz erişilebilir değil          |
+| `created`       | Veri tanımlı ama DOM henüz yok         |
+| `beforeMount`   | İlk render'dan hemen önce              |
+| `mounted`       | İlk render'dan sonra, DOM erişilebilir |
+| `beforeUpdate`  | Reaktif veri değişmeden önce           |
+| `updated`       | Reaktif veri güncellendikten sonra     |
+| `beforeUnmount` | Komponent DOM'dan silinmeden önce      |
+| `unmounted`     | Komponent DOM'dan tamamen silindiğinde |
