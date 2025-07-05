@@ -1,0 +1,40 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Learning Vue</title>
+    <script src="https://unpkg.com/vue@3.0.2"></script>
+  </head>
+  <body>
+    <h1>Hello Vue</h1>
+
+    <!-- this is the root element of the Vue app -->
+    <div id="app">
+      <div>
+        <!-- if variable name is not matched, Vue will not display it -->
+        <p>{{ title }} - {{ author }} - {{ age }}</p>
+
+        <button v-on:click="age++">Increase age</button>
+        <button v-on:click="age--">Decrease age</button>
+        <div @click="changeTitle('Oathbringer')">Change book title</div>
+      </div>
+
+      <div>
+        <p v-if="showBooks">{{ title }} - {{ author }} - {{ age }}</p>
+
+        <button @click="toggleShowBooks">
+          <span v-if="showBooks">Hide Books</span>
+          <span v-else>Show Books</span>
+        </button>
+      </div>
+
+      <!-- v-show only toggles visibility, not the element itself. display: none vs display: block -->
+      <div v-show="showBooks">currently showing books</div>
+    </div>
+
+    <!-- this is a plain text outside Vue app. Vue can't display variable outside of root element -->
+    <!-- {{ title }} -->
+
+    <script src="app.js"></script>
+  </body>
+</html>
