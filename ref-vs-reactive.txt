@@ -1,0 +1,33 @@
+🔄 1. Temel Farklar
+| Özellik           | `ref()`                                              | `reactive()`                                   |
+| ----------------- | ---------------------------------------------------- | ---------------------------------------------- |
+| Kullanım amacı    | Primitif (string, number, boolean) ve tekil değerler | Objeler, diziler gibi karmaşık veri yapıları   |
+| Erişim şekli      | `.value` ile erişilir                                | Doğrudan erişilir                              |
+| İç içe yapı       | Derin reaktivite yok (iç objeler reactive olmaz)     | Derin reaktiftir (iç objeler de reactive olur) |
+| Proxy mekanizması | Değer, proxy içinde `.value`'da saklanır             | Tüm nesne proxy'ye dönüştürülür                |
+
+🧪 2. Kodla Karşılaştırma
+✅ ref() Kullanımı:
+import { ref } from 'vue';
+const count = ref(0);
+count.value++; // erişim için `.value` gerekir
+
+✅ reactive() Kullanımı:
+import { reactive } from 'vue';
+const user = reactive({
+  name: mario
+  age: 25
+});
+user.name = 'Ahmet'; // doğrudan erişim
+
+🧠 3. Ne Zaman Hangisi Kullanılır?
+ref():
+Primitif türler (number, string, boolean) için idealdir
+v-model ile kullanımda yaygındır
+Vue <script setup> içinde daha sade kullanım sunar
+Tek bir değeri izlemek istersen kullanılır
+
+reactive():
+Karmaşık objeler veya diziler için uygundur
+Çok alanlı formlar, ayarlar nesneleri gibi yapılarda idealdir
+İç içe objeleri reaktif olarak yönetmek istiyorsan tercih edilir

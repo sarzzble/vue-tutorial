@@ -1,0 +1,23 @@
+Vue 3'te computed() fonksiyonu, hesaplanmış (türetilmiş) veriler oluşturmak için kullanılır. Bu veriler, bağımlı olduğu reaktif verilere göre otomatik olarak güncellenir ama yalnızca gerektiğinde hesaplanır (caching özelliği vardır).
+
+✅ Ne İşe Yarar?
+Bir veya daha fazla ref veya reactive veriye bağlı türetilmiş değerler üretir.
+Bağımlı olduğu veri değişmedikçe tekrar hesaplanmaz (performanslıdır).
+Template içinde veya script içinde kolayca kullanılabilir.
+
+Örnek:
+import { ref, computed } from 'vue';
+
+const firstName = ref('super');
+const lastName = ref('mario');
+
+const fullName = computed(() => {
+  return `${firstName.value} ${lastName.value}`;
+});
+
+console.log(fullName.value); // "super mario"
+
+Burada:
+fullName bir computed property.
+firstName ya da lastName değişirse fullName otomatik güncellenir.
+Ama firstName ve lastName değişmedikçe, fullName tekrar hesaplanmaz (cache mekanizması sayesinde).
