@@ -1,4 +1,4 @@
-# blog-app
+# composition-api-1
 
 ## Project setup
 ```
